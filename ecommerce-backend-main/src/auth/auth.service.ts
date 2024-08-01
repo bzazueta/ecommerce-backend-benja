@@ -101,4 +101,12 @@ export class AuthService {
         return data;
     }
 
+    async delete(id: number)  {
+        const productFound = await this.usersRepository.findOneBy({ id: id });
+        if (!productFound) {
+            throw new HttpException("Usuario no encontrado", HttpStatus.NOT_FOUND);
+        }
+        return this.usersRepository.delete(id);
+    }
+
 }
